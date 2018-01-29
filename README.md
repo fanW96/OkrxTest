@@ -11,7 +11,8 @@
 
 ## RecyclerView
 - 使用其代替ListView显示
-- 下拉刷新，上拉加载
+- 下拉刷新：原生的SwipeRefreshLayout，初始加载使用.post()，下拉实现使用.setOnRefreshListener()
+- 上拉加载：使用RecyclerView的Scroll监听，在到达特定位置的时候使用Footer显示加载状态，再在postExcurte中去掉Footer行实现新行的添加
 - 未完成：多种显示，左滑删除等附加功能
 
 ## AsyncTask
