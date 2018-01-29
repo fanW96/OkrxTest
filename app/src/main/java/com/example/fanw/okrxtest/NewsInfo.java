@@ -51,6 +51,42 @@ public class NewsInfo implements Serializable {
 
     private List<ImgextraBean> imgextra;
 
+
+    public NewsInfo() {
+    }
+
+    public NewsInfo(String postid, boolean hasCover, int hasHead, int replyCount, int hasImg, String digest, boolean hasIcon, String docid, String title, String ltitle, int order, int priority, String lmodify, String boardid, String photosetID, String template, int votecount, String skipID, String alias, String skipType, String cid, int hasAD, String source, String ename, String imgsrc, String tname, String ptime, List<AdsBean> ads, List<ImgextraBean> imgextra) {
+        this.postid = postid;
+        this.hasCover = hasCover;
+        this.hasHead = hasHead;
+        this.replyCount = replyCount;
+        this.hasImg = hasImg;
+        this.digest = digest;
+        this.hasIcon = hasIcon;
+        this.docid = docid;
+        this.title = title;
+        this.ltitle = ltitle;
+        this.order = order;
+        this.priority = priority;
+        this.lmodify = lmodify;
+        this.boardid = boardid;
+        this.photosetID = photosetID;
+        this.template = template;
+        this.votecount = votecount;
+        this.skipID = skipID;
+        this.alias = alias;
+        this.skipType = skipType;
+        this.cid = cid;
+        this.hasAD = hasAD;
+        this.source = source;
+        this.ename = ename;
+        this.imgsrc = imgsrc;
+        this.tname = tname;
+        this.ptime = ptime;
+        this.ads = ads;
+        this.imgextra = imgextra;
+    }
+
     public String getPostid() {
         return postid;
     }

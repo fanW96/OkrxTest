@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.example.fanw.okrxtest.MainActivity">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_article"
+    <!--使用原生的刷新布局-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/news_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content">
+
+        <!--新闻展示的RecyclerView-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_article"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>
