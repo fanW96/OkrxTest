@@ -49,4 +49,8 @@ dependencies {
         * 第三方开源的processBar依赖
         * */
     implementation 'com.android.support:design:27.0.2'
+    /*
+    * 第三方的侧滑删除依赖
+    * */
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
 }

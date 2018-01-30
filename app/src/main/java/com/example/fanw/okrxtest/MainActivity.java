@@ -3,11 +3,13 @@ package com.example.fanw.okrxtest;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -35,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         news_refresh = findViewById(R.id.news_refresh);
         rcvArticle.setLayoutManager(new LinearLayoutManager(context));
         itemNewsAdapter = new ItemNewsAdapter(newsInfoList,context);
+
+        // 设置item及item中控件的点击事件
+        itemNewsAdapter.setOnItemClickListener(onItemClickListener);
+
         rcvArticle.setAdapter(itemNewsAdapter);
         rcvArticle.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -72,6 +78,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    /**
+     * Item点击监听
+     */
+    private OnItemClickListener onItemClickListener = new OnItemClickListener() {
+        @Override
+        public void onItemClick(int position , View v) {
+            switch (v.getId()){
+                case R.id.news_title_tv:
+                    Snackbar.make(v,"tran", Snackbar.LENGTH_LONG).show();
+                    break;
+                case R.id.cv_Delete:
+                    Snackbar.make(v,"del",Snackbar.LENGTH_LONG).show();
+                    newsInfoList.remove(position);
+                    itemNewsAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onDestroy() {

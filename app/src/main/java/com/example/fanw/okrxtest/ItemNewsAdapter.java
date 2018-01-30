@@ -1,14 +1,21 @@
 package com.example.fanw.okrxtest;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.daimajia.swipe.SwipeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +37,9 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public final static int TYPE_FOOTER = 2;//底部--往往是loading_more
     public final static int TYPE_NORMAL = 1; // 正常的一条文章
 
+    //监听事件
+    private OnItemClickListener mOnItemClickListener;
+
     public ItemNewsAdapter(List<NewsInfo> newsInfoList, Context context) {
         if(newsInfoList == null){
             this.newsInfoList = new ArrayList<NewsInfo>();
@@ -38,6 +48,11 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         this.context = context;
         this.layoutInflater =  LayoutInflater.from(context);
+    }
+
+    //监听事件获取
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.mOnItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -95,6 +110,26 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             itemNewsViewHolder.news_ptime_tv.setText(newsInfo.getPtime());
             itemNewsViewHolder.news_digest_tv.setText(newsInfo.getDigest());
             GlideApp.with(context).load(newsInfo.getImgsrc()).placeholder(R.mipmap.ic_launcher).into(itemNewsViewHolder.news_photo_iv);
+            //给Holder的组件设置点击事件
+            /*itemNewsViewHolder.news_title_tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v,"nihao",Snackbar.LENGTH_LONG).show();
+                }
+            });*/
+            //swipeLayout设置
+            //set show mode.
+            itemNewsViewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
+            //add drag edge.(If the BottomView has 'layout_gravity' attribute, this line is unnecessary)
+            itemNewsViewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left, itemNewsViewHolder.bottom_wrapper);
+
+            //删除监听
+            /*itemNewsViewHolder.cv_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });*/
         }
     }
 
@@ -119,11 +154,16 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return newsInfoList.size();
     }
 
-    public class ItemNewsViewHolder extends RecyclerView.ViewHolder{
+    public class ItemNewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+//        OnItemClickListener mOnItemClickListenerTemp;
         ImageView news_photo_iv;
         TextView news_title_tv;
         TextView news_digest_tv;
         TextView news_ptime_tv;
+        SwipeLayout swipeLayout;
+        CardView cv_delete;
+        LinearLayout bottom_wrapper;
+
 
         public ItemNewsViewHolder(View itemView) {
             super(itemView);//holder设定
@@ -131,7 +171,19 @@ public class ItemNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             news_title_tv = itemView.findViewById(R.id.news_title_tv);
             news_digest_tv = itemView.findViewById(R.id.news_digest_tv);
             news_ptime_tv = itemView.findViewById(R.id.news_ptime_tv);
+            swipeLayout = itemView.findViewById(R.id.delete_swipe);
+            cv_delete = itemView.findViewById(R.id.cv_Delete);
+            bottom_wrapper = itemView.findViewById(R.id.bottom_wrapper);
+            news_title_tv.setOnClickListener(this);
+            cv_delete.setOnClickListener(this);
+        }
 
+
+        @Override
+        public void onClick(View v) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(getAdapterPosition() , v);
+            }
         }
     }
 
