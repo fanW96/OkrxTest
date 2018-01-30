@@ -5,9 +5,15 @@
 - 注意1：记得创建onSuccessConvert的JsonCallBack
 - 注意2：给定的泛型的取回值在respose.body()中
 
+## Glide
+- 简单的Glide使用
+- 添加Application模块注释GlideModule生成功能更多的Api即GlideAPP使用
+
 ## RecyclerView
 - 使用其代替ListView显示
-- 未完成：下拉刷新，上拉加载
+- 下拉刷新：原生的SwipeRefreshLayout，初始加载使用.post()，下拉实现使用.setOnRefreshListener()
+- 上拉加载：使用RecyclerView的Scroll监听，在到达特定位置的时候使用Footer显示加载状态，再在postExcurte中去掉Footer行实现新行的添加
+- 未完成：多种显示，左滑删除等附加功能
 
 ## AsyncTask
 - 遇到问题：方法执行的过程中会有单独的线程，不会等待OkGo执行成功
@@ -16,3 +22,5 @@
 ## 参考文档
 - [RecyclerView代替 ListView](http://blog.csdn.net/never_cxb/article/details/50495505)
 - [OkGo](https://github.com/jeasonlzy/okhttp-OkGo/wiki)
+- [RecyclerView的下拉刷新和上拉加载更多](http://blog.csdn.net/never_cxb/article/details/50759109)
+- [Glide](https://github.com/bumptech/glide/wiki)
